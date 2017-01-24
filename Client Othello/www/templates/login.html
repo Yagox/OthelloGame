@@ -1,0 +1,22 @@
+<ion-view title="Login" ng-controller="HomeController as home_ctrl">
+  <header class="bar bar-header bar-positive">
+    <h1 class="title">Othello Game - Login</h1>
+  </header>
+
+  <ion-content class="has-header padding">
+
+    <div class="list">
+      <label class="item item-input">
+        <input type="text" ng-model="home_ctrl.username" placeholder="Nombre de Usuario">
+      </label>
+      <div class="error" ng-if="home_ctrl.error_login">
+        <p>Nombre de usuario ya existente</p>
+      </div>
+      <div class="padding">
+        <button class="button button-positive button-block" ng-click="login(home_ctrl.username)">Entrar</button>
+      </div>
+    </div>
+
+  </ion-content>
+
+</ion-view>

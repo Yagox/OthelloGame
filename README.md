@@ -1,2 +1,7 @@
-# OthelloGame
-We want to guarantee access to all people to the game othello
+JUEGO REALIZADO POR 
+DAMIAN EL PESCADOR
+YAGO EL TRABAJOR
+Y ISMAEL EL......
+
+
+SE REALIZARA UN JUEGO PARA DOS CONCURSOS, ASI SOMOS DE VAGO
