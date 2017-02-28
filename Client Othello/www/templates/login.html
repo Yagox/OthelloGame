@@ -1,22 +1,17 @@
 <ion-view title="Login" ng-controller="HomeController as home_ctrl">
   <header class="bar bar-header bar-positive">
-    <h1 class="title">Othello Game - Login</h1>
+    <h1 class="title">Othello</h1>
   </header>
 
-  <ion-content class="has-header padding">
+  <ion-content class="has-header">
 
-    <div class="list">
-      <label class="item item-input">
-        <input type="text" ng-model="home_ctrl.username" placeholder="Nombre de Usuario">
-      </label>
-      <div class="error" ng-if="home_ctrl.error_login">
-        <p>Nombre de usuario ya existente</p>
-      </div>
-      <div class="padding">
-        <button class="button button-positive button-block" ng-click="login(home_ctrl.username)">Entrar</button>
-      </div>
-    </div>
+  <h2 class="text-main">Bienvenido</h2>
+
+  <ion-toggle class="check-acces" ng-model="home_ctrl.accesibilidad" disabled checked="false">Accesibilidad</ion-toggle>
+  <button class="button button-positive button-full button-footer" ng-click="login(home_ctrl.accesibilidad)">Entrar</button>
 
   </ion-content>
+
+
 
 </ion-view>

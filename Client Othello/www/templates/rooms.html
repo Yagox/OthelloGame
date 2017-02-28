@@ -1,19 +1,24 @@
 <ion-view title="Rooms" ng-controller="HomeController as home_ctrl">
   <header class="bar bar-header bar-positive">
-    <h1 class="title">Othello Game - Partidas Disponible</h1>
+    <h1 class="title">Othello Game</h1>
   </header>
-
-  <ion-content class="has-header padding">
-    <div clasS="create-game" ng-click="createGame()">
-      <strong>Crear partida</strong>
-      <i class="fa icon-more"></i>
+  <ion-content class="has-header">
+    <div class="header-rooms">
+      <label>Salas Disponibles</label>
     </div>
-    <div class="card" ng-repeat="room in home_ctrl.rooms">
-      <div class="item item-text-wrap text-center" ng-click="joinGame(room)">
-        <strong>{{room}}</strong>
-        <i class="fa icon-more"></i>
+    <ion-list class="rooms" >
+      <div class="room accesibilidad" ng-repeat="(room, info) in home_ctrl.rooms" ng-click="joinGame(room)">
+          <!--<img src=""/> -->
+          <div class="card-title">{{ room }}</div>
+          <div class="card-subtitle">by {{ info.user }}</div>
       </div>
-    </div>
+    </ion-list>
   </ion-content>
+  <ion-footer>
+    <button class="button button-positive button-full button-footer"  ng-click="createGame()" >
+      Crear Partida
+      <ion-icon class="left-icon" ios="ios-add-circle" md="md-add-circle"></ion-icon>
+    </button>
+  </ion-footer>
 
 </ion-view>

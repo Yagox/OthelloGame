@@ -1,28 +1,35 @@
-<ion-view title="{{ game_ctrl.current_room }}" ng-controller="GameController as game_ctrl">
+<ion-view title="game" ng-controller="GameController as game_ctrl">
   <header class="bar bar-header bar-positive">
-    <h1 class="title">{{ game_ctrl.current_room }} | {{ getOpponentName()}}</h1>
-    <button class="button button-assertive" ng-click="leaveRoom()">Leave</button>
+    <h1 class="title">Othello Game</h1>
   </header>
 
   <ion-content class="has-header padding">
+    <div class="info-game">
+      <div class="oponnents">
 
+      </div>
+      <div class="turn">
+
+      </div>
+    </div>
     <div class="board">
       <div class="board-row" ng-repeat="row in game_ctrl.rowsT">
-          <div class="board-column" ng-repeat="column in game_ctrl.columnsT">
-            <div class="board-cell cell-{{row}}-{{column}} {{ getToken(row, column)}}" ng-click="putToken(row, column)" >
-                <div class="cell-token"></div>
+          <div class="board-column" ng-repeat="column in game_ctrl.columnsT track by $index">
+            <div class="board-cell {{row}}-{{column}} {{ getToken(row, column)}}" ng-click="putToken(row, column, getToken(row, column))" >
+
             </div>
           </div>
       </div>
     </div>
   </ion-content>
 
-
+ <!--
+ {{ game_ctrl.current_room }} | {{ getOpponentName()}}
   <footer class="bar bar-footer bar-positive item-input-inset">
     <label class="item-input-wrapper">
       <input type="text" id="message" name="message" ng-model="room_ctrl.message" placeholder="Type message">
     </label>
     <a class="button button-icon icon ion-android-send" ng-click="sendTextMessage()"></a>
   </footer>
-
+  -->
 </ion-view>

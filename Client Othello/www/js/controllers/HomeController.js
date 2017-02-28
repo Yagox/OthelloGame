@@ -2,42 +2,39 @@
   angular.module('starter')
     .controller('HomeController', ['$scope', '$state', 'localStorageService', 'SocketService', HomeController]);
 
-  function HomeController($scope, $state, localStorageService, SocketService){
+  function HomeController($scope, $state, localStorageService, SocketService, AccesibilidadService){
 
     var me = this;
 
-    me.current_room = localStorageService.get('room');
-
-    $scope.login = function(username){
-      SocketService.emit('check:login', username);
+    me.rooms = {}
+    me.current_room = localStorageService.get('rooms');
+    me.mode = false;
+    $scope.login = function(accesibilidad){
+      me.mode = accesibilidad;
+      localStorageService.set('mode', accesibilidad);
+      SocketService.emit('login', "");
     };
 
-    SocketService.on('check:login', function(data){
-        if(data['ok']){
-          me.current_user = data['username'];
-          localStorageService.set('username', username);
-          me.rooms = data['rooms'];
-          $ionicScrollDelegate.scrollTop();
-          $state(rooms);
-        }else{
-          me.error_login = true;
-        }
+    SocketService.on('list rooms', function(data){
+        me.rooms = data;
+        console.log('Comando list rooms');
+        console.log(data);
+        $state.go('rooms');
     });
 
     $scope.joinGame = function(room_name){
       var room = {
-        'room_name': room_name,
-        'user': me.current_user
+        'room': room_name,
       };
-      SocketService.emit('join:game', room);
+      localStorageService.set('room', room_name);
+      SocketService.emit('join board', room);
     };
     $scope.createGame = function(){
-      SocketService.emit('create:game', me.current_room);
+      SocketService.emit('create board', '');
     };
-
-    SocketService.on('join:game', function(data){
-      localStorageService.set('room', data['room']);
+    SocketService.on('board', function(data){
       localStorageService.set('game', data);
+      console.log(data);
       $state.go('game');
     });
   }

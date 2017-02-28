@@ -5,31 +5,32 @@
   function GameController($scope, $state, localStorageService, SocketService, moment, $ionicScrollDelegate) {
 
     var me = this;
-    me.rowsT = ["1", "2", "3", "4", "5", "6", "7", "8"];
-    me.columnsT = ["A", "B", "C", "D", "E", "F", "G", "H"];
-
+    var data = localStorageService.get('game');
     me.current_room = localStorageService.get('room');
-    me.current_user = localStorageService.get('username');
-    me.game = localStorageService.get('game');
-    if(me.game == null){
-      me.game = {
-        'table': {"4":{"D":0, "E":1}, "5":{"D":1, "E":0}},
-        'opponent': '',
-        'tokens': 4,
-        'turn': '',
-        'color': '',
-        'room': me.current_room
-      };
-      localStorageService.set('game', me.game);
+    me.rowsT = ["1", "2", "3", "4", "5", "6", "7", "8"];
+    me.columnsT = ["1", "2", "3", "4", "5", "6", "7", "8"];
+    me.board = {
+        "4" : {
+          "4": 0,
+          "5": 1
+        },
+        "5": {
+          "4": 1,
+          "5": 0
+        }
     }
+    if(data != null && 'board' in data){ me.token = data['board'];}
+    if(data != null && 'token' in data){ me.token = data['token'];}
+    if(data != null && 'turn' in data){  me.turn = data['turn'];}
+    if(data != null && 'next token' in data){ me.nextToken = data['next token']};
 
     $scope.getToken = function (row, column) {
-      if(row in me.game && column in me.game[row]){
-        var token = me.game[row][column];
+      if(row in me.board && column in me.board[row]){
+        var token = me.board[row][column];
         if(token == 0){
-          return 'token-white';
+          return 'token token-white';
         }
-        return 'token-black';
+        return 'token token-black';
       }
       return 'token-empty';
     };
@@ -38,40 +39,27 @@
       return me.game['opponent'];
     };
 
-    $scope.create = function(){
-      var data = {
-        'user': me.current_user,
-        'room': me.current_room,
-        'time': moment()
-      };
-      SocketService.emit('join:room', data);
-    };
-
-    SocketService.on('game:start', function(data){
-
-    });
-
     $scope.putToken = function(row, column, getToken){
       if(getToken == 'token-empty'){
         var data = {
           'row': row,
           'column': column,
-          'turn': me.current_user,
-          'room': me.current_room,
-          'table': me.game['table']
+          'user': me.current_user,
+          'room': me.current_room
         };
-        SocketService.emit('game:put', data);
+        SocketService.emit('put disk', data);
+        console.log("ha entrado");
       }
     };
 
-    SocketService.on('game:put', function(data){
-      var game = me.game;
-      game['table'] = data['table'];
-      game['tokens'] +=1;
-      game['turn'] = data['turn'];
-      localStorageService.set('game', game);
-      me.game = game;
-      $state('game');
+    SocketService.on('board', function(data){
+      console.log('Comando board');
+      console.log(data)
+      if(data != null && 'board' in data){ me.token = data['board'];}
+      if(data != null && 'token' in data){ me.token = data['token'];}
+      if(data != null && 'turn' in data){  me.turn = data['turn'];}
+      if(data != null && 'next token' in data){ me.nextToken = data['next token']};
+      localStorageService.set('game', data);
     });
   }
   })();
