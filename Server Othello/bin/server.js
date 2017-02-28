@@ -1,4 +1,4 @@
-var io = require('socket.io')(3001);
+var y
 
 io.on('connection', function(socket){
 
@@ -7,8 +7,6 @@ io.on('connection', function(socket){
         socket.join(room_name);
         console.log('someone joined room ' + room_name + ' ' + socket.id);
     });
-
-
     socket.on('leave:room', function(msg){
         msg.text = msg.user + " has left the room";
         socket.in(msg.room).emit('exit', msg);

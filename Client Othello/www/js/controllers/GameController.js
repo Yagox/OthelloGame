@@ -53,13 +53,41 @@
     };
 
     SocketService.on('board', function(data){
-      console.log('Comando board');
-      console.log(data)
-      if(data != null && 'board' in data){ me.token = data['board'];}
-      if(data != null && 'token' in data){ me.token = data['token'];}
-      if(data != null && 'turn' in data){  me.turn = data['turn'];}
-      if(data != null && 'next token' in data){ me.nextToken = data['next token']};
-      localStorageService.set('game', data);
+      console.log(data);
+      console.log(me.current_room);
+      if(data['room'] == me.current_room){
+        console.log('Comando board');
+        console.log(data)
+        if(data != null && 'board' in data){ me.token = data['board'];}
+        if(data != null && 'token' in data){ me.token = data['token'];}
+        if(data != null && 'turn' in data){  me.turn = data['turn'];}
+        if(data != null && 'next token' in data){ me.nextToken = data['next token']};
+        var data_board = data['board'];
+        var board = me.board;
+        for(var r =1; r<=8; r++){
+          for (var c=1; c<=8; c++){
+            var token = data_board[r][c];
+            if(token != 0){
+              var row = r.toString();
+              var column = c.toString();
+              console.log(column);
+              if(row in board){
+                  if(!(column in board[row])){
+                    board[row] = {}
+                  }
+              }else{
+                board[row] = {}
+              }
+              board[row][column] = (token == "blanca") ? 0 : 1;
+            }
+          }
+        }
+        console.log(board);
+        data['board'] = board;
+        me.board = board;
+        localStorageService.set('game', data);
+        $state.go($state.current, {}, {reload: true});
+      }
     });
   }
   })();

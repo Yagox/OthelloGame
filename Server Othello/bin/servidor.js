@@ -40,20 +40,39 @@ http.listen( 3001, () => console.log('Servidor corriendo desde localhost:3001') 
 io.on('connection', (socket) => {
 	socket.on( 'login', () => {
 		console.log("login hecho")
+		  	      console.log("Toca login':" + socket.client.id);
 		socket.emit('list rooms', GameInicial.listRooms());
+        socket.join('waitRooms');
 	});
   	socket.on( 'create board' , data =>{
+  	      console.log("Toca Put create board':" + socket.client.id);
+
   	    let tablero = GameInicial.nuevoGame(socket.client.id);
-		socket.emit("board", GameInicial.nuevoGame(socket.client.id));
+  	    let room_name = tablero['room'];
+		socket.emit("board inicial", tablero);
+		socket.join(room_name);
+		socket.in('waitRooms').emit('list rooms', GameInicial.listRooms());
         console.log(tablero);
 	});
 	socket.on( 'join board', data => {
-		socket.emit("board",  GameInicial.joinGame(data['room'], socket.client.id));
-		console.log(data)
+      console.log("Toca Put join board':" + socket.client.id);
+        let tablero =  GameInicial.joinGame(data['room'], socket.client.id);
+        let room_name = tablero['room'];
+		socket.emit("board inicial",  tablero);
+		socket.join(room_name);
+		socket.in(room_name).emit(tablero);
+		console.log(tablero);
 	});
   	socket.on( 'put disk' , data => {
-		  console.log(data)
-		socket.emit("board", GameInicial.putDisk(data['room'], socket.client.id, data['row'], data['col']));
+  	      console.log("Toca Put disk:" + socket.client.id);
+		  let room_name = data['room'];
+		  let tablero = GameInicial.putDisk(room_name, socket.client.id, data['row'], data['column']);
+		  if(tablero != null){
+              console.log("ESte es el neuvo tablero");
+              console.log(tablero);
+              socket.in(room_name).emit("board", tablero);
+              socket.emit("board", tablero);
+		  }
 	  } );
 
 	conexions++;
@@ -69,5 +88,4 @@ io.on('connection', (socket) => {
 		socket.broadcast.emit('connect users', { numbers : conexions });
 	});
 });
-
 

@@ -11,5 +11,26 @@
       Numero de conexiones activas: <b id="conexions"></b>
     </p>
     <script src="./socket.io/socket.io.js"></script>
-      </body>
+    <script>
+      (function (d, io) {
+        'use strict';
+
+        var io = io();
+
+        io.on('hello', function (data) {
+          console.log(data);
+          d.querySelector('#hello').innerHTML = data.message;
+          io.emit('otro evento que me invite', {
+            name: 'Damian',
+            alias: 'DemianRV'
+          });
+        });
+        io.on('nuevo usuario', function (data) {
+  				console.log('Actualizando desde el Servidor. Hay ' + data.numbers + ' conexiones activas');
+
+  				d.querySelector('#conexions').innerHTML = data.numbers;
+  			});
+      })(document, io);
+    </script>
+  </body>
 </html>

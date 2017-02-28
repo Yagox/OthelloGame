@@ -94,13 +94,16 @@ class Board {
     infoBoard() {
         return {
             'user' : this.playerOne.name,
-            'ide' : this.playerOne.id
         }
     }
 //Poner ficha
-    setToken(row, col) {
+    setToken(r, c) {
+        let row = parseInt(r, 10);
+        let col = parseInt(c, 10);
+        console.log("Posible : " + this.nextTokens);
+        console.log("Row : " + row + " " + "Col : "+ col);
         let r1 = this.nextTokens.has(this.getNumberToken(row, col));
-        
+        console.log(r1);
         if (r1) {
             this.changeColor(this.turn, row, col);
             this.changeDisks(this.turn, this.getArray(row, col));

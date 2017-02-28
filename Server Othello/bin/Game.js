@@ -52,12 +52,12 @@ class Game {
     }
 //Put disk
     putDisk(nameBoard, idUser, row, col) {
-        let indexBoard = this.getIndexOfBoardGame(nameBoard);
+        let boardGame = this.getIndexOfBoardGame(nameBoard);
         let res;
-        if (indexBoard != 1) {
-            let boardGame = this.boardsGame[indexBoard];
+        if (boardGame != null) {
+            console.log(boardGame);
             if (boardGame.canPutUser(idUser)) {
-                boardGame.setToken(row, col);
+                boardGame.setToken(parseInt(row, 10), parseInt(col, 10));
                 res = this.getBoard(boardGame)
                 return res;
             } else {
@@ -68,25 +68,35 @@ class Game {
         }
     }
     getIndexOfBoardGame(nameBoard) {
-        let indexBoard = -1;
+        let board = null;
         this.boardsGame.forEach(function(element) {
             if(element.getNameBoard() == nameBoard) {
-                indexBoard = this.boardsGame.indexOf(element);
+                board = element;
             }
         }, this);
-        return indexBoard;
+        return board;
     }
     getBoard(boardGame) {
+        let array = new Array();
+        let next = boardGame.getNextTokens();
+        next.forEach(function(element){
+            let token = new Array();
+            token.push(parseInt(element/10, 10));
+            token.push(element % 10);
+            array.push(token);
+        });
         return {
-            'next token': boardGame.getNextTokens(),
+            'next token': array,
             'turn': boardGame.getUserTurn(),
             'token' : boardGame.getTurn(),
-            'board': boardGame.getTokens()
+            'board': boardGame.getTokens(),
+            'room': boardGame.getNameBoard(),
         }
     }
     getBoarInitial(boardGame) {
         return {
-            'next token': undefined,
+            'room': boardGame.getNameBoard(),
+            'next token': [],
             'turn': '',
             'token' : "blanca",
             'board': boardGame.getTokens()
