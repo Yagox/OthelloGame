@@ -85,6 +85,7 @@ class Game {
             token.push(element % 10);
             array.push(token);
         });
+
         return {
             'next token': array,
             'turn': boardGame.getUserTurn(),
