@@ -30,7 +30,7 @@ class Game {
             return this.getBoard(changeBoard);
         } else {
             console.log("No existe ningun tablero con ese nombre");
-        }        
+        }
     }
     getIndexOfBoardWait(nameBoard) {
         let indexBoard = -1;
@@ -101,6 +101,12 @@ class Game {
             'turn': '',
             'token' : "blanca",
             'board': boardGame.getTokens()
+        }
+    }
+    playersGameInfoCurrent(nameBoard, idUser) {
+        let board = this.getIndexOfBoardGame(nameBoard);
+        if (board) {
+          return board.infoPlayer(idUser);
         }
     }
 

@@ -96,6 +96,27 @@ class Board {
             'user' : this.playerOne.name,
         }
     }
+    infoPlayer(idUser) {
+      if(idUser == this.playerOne.id) {
+        return this.infoPlayerBlack();
+      } else {
+        return this.infoPlayerWhite();
+      }
+    }
+    infoPlayerBlack() {
+	     return {
+        'oponent': this.playerTwo.name,
+        'current': this.playerOne.name,
+        'color': 'negra'
+	     }
+    }
+    infoPlayerWhite() {
+	return {
+	    'oponent': this.playerOne.name,
+	    'current': this.playerTwo.name,
+	    'color': 'blanca'
+	}
+    }
 //Poner ficha
     setToken(r, c) {
         let row = parseInt(r, 10);
@@ -205,7 +226,7 @@ class Board {
         i = row;
         j = col + 1;
         let change = false;
-        
+
         while(j <= this.rowNcol) {
             /* Para cuando es el mismo color */
             if (this.getToken(i,j) == color) {
@@ -231,7 +252,7 @@ class Board {
         i = row + 1;
         j = col;
         let change = false;
-        
+
         while(i <= this.rowNcol) {
             /* Para cuando es el mismo color */
             if (this.getToken(i,j) == color) {
@@ -257,7 +278,7 @@ class Board {
         i = row - 1;
         j = col - 1;
         let change = false;
-        
+
         while(i > 0 && j > 0) {
             /* Para cuando es el mismo color */
             if (this.getToken(i,j) == color) {
@@ -284,7 +305,7 @@ class Board {
         i = row - 1;
         j = col + 1;
         let change = false;
-        
+
         while(i > 0 && j <= 8) {
             /* Para cuando es el mismo color */
             if (this.getToken(i,j) == color) {
@@ -311,7 +332,7 @@ class Board {
         i = row + 1;
         j = col - 1;
         let change = false;
-        
+
         while(i <= 8 && j > 0) {
             /* Para cuando es el mismo color */
             if (this.getToken(i,j) == color) {
@@ -338,7 +359,7 @@ class Board {
         i = row + 1;
         j = col + 1;
         let change = false;
-        
+
         while(i <= 8 && j <= 8) {
             /* Para cuando es el mismo color */
             if (this.getToken(i,j) == color) {
@@ -384,7 +405,7 @@ class Board {
         i++;
         if (this.isValid(i,j) && !this.existDisk(i,j)) {
             newNeightBours.add(i*10 + j);
-        }        
+        }
         // row center col left
         j = col - 1;
         if (this.isValid(i,j) && !this.existDisk(i,j)) {
@@ -415,7 +436,7 @@ class Board {
             row = parseInt(element / 10, 10);
             col = element%10;
             this.flipDisks(this.turn, row, col, element);
-            
+
         }, this);
 
 

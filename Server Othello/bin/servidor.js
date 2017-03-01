@@ -10,7 +10,7 @@ Socket.IO
 'use strict';
 /*const Game = require('./Game'),
     GameInicial = new Game();
-*/	
+*/
 const http = require('http').createServer(server),
 	fs = require('fs'),
 	io = require('socket.io')(http);
@@ -58,9 +58,17 @@ io.on('connection', (socket) => {
       console.log("Toca Put join board':" + socket.client.id);
         let tablero =  GameInicial.joinGame(data['room'], socket.client.id);
         let room_name = tablero['room'];
+				let players = GameInicial.playersGameInfoCurrent(tablero['room'], socket.client.id);
+				let oponent = {
+					'oponent': players['current'],
+	        'current': players['oponent'],
+	        'color': (players['color'] == 'negra' ) ? 'blanca' : 'negra'
+				}
 		socket.emit("board inicial",  tablero);
+		socket.emit("playersGame", players);
 		socket.join(room_name);
-		socket.in(room_name).emit(tablero);
+		socket.in(room_name).emit('board inicial' ,tablero);
+		socket.in(room_name).emit('playersGame', oponent);
 		console.log(tablero);
 	});
   	socket.on( 'put disk' , data => {
@@ -88,4 +96,3 @@ io.on('connection', (socket) => {
 		socket.broadcast.emit('connect users', { numbers : conexions });
 	});
 });
-
