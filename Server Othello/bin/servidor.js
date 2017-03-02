@@ -55,19 +55,21 @@ io.on('connection', (socket) => {
 	});
 	socket.on( 'join board', data => {
       console.log("Toca Put join board':" + socket.client.id);
-        let tablero =  GameInicial.joinGame(data['room'], socket.client.id);
-        let room_name = tablero['room'];
-        let players = GameInicial.playersGameInfoCurrent(tablero['room'], socket.client.id);
+         let room_name = data['room'];
+        let tablero =  GameInicial.joinGame(room_name, socket.client.id);
+        let players = GameInicial.playersGameInfoCurrent(room_name, socket.client.id);
         let oponent = {
             'opponent': players['current'],
             'current': players['opponent'],
             'color': (players['color'] == 'negra' ) ? 'blanca' : 'negra'
         }
+        console.log(players);
+        console.log(oponent);
         socket.in(room_name).emit('playersGame', oponent);
         socket.emit("playersGame", players);
 
 		socket.join(room_name);
-		socket.in(room_name).emit('board inicial' ,tablero);
+		socket.in(room_name).emit('board' ,tablero);
 		socket.emit("board inicial",  tablero);
 	});
   	socket.on( 'put disk' , data => {

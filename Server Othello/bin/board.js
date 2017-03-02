@@ -105,14 +105,14 @@ class Board {
     }
     infoPlayerBlack() {
 	     return {
-        'oponent': this.playerTwo.name,
+        'opponent': this.playerTwo.name,
         'current': this.playerOne.name,
         'color': 'negra'
 	     }
     }
     infoPlayerWhite() {
 	return {
-	    'oponent': this.playerOne.name,
+	    'opponent': this.playerOne.name,
 	    'current': this.playerTwo.name,
 	    'color': 'blanca'
 	}
