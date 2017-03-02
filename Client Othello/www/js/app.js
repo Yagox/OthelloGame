@@ -35,6 +35,16 @@ angular.module('starter', ['ionic', 'LocalStorageModule', 'btford.socket-io', 'a
       templateUrl: 'templates/rooms.html'
     })
 
+    .state('rooms-accesible', {
+          url: '/rooms-accesible',
+          templateUrl: 'templates/rooms-accesible.html'
+        })
+
+    .state('game-accesible', {
+          url: '/game-accesible',
+          templateUrl: 'templates/game-accesible.html'
+    })
+
     .state('game', {
       url: '/game',
       templateUrl: 'templates/game.html'

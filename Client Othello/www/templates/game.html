@@ -4,12 +4,13 @@
   </header>
 
   <ion-content class="has-header padding">
-    <div class="info-game">
+    <div class="info-game" ng-if="game_ctrl.start">
       <div class="oponnents">
-
+        <p>{{ game_ctrl.current_user }} VS {{ game_ctrl.opponent_user }}</p>
+        <p>Tus fichas son de color {{ game_ctrl.color }}</p>
       </div>
       <div class="turn">
-
+        <p>Turno de {{ game_ctrl.color }}</p>
       </div>
     </div>
     <div class="board">
@@ -22,14 +23,4 @@
       </div>
     </div>
   </ion-content>
-
- <!--
- {{ game_ctrl.current_room }} | {{ getOpponentName()}}
-  <footer class="bar bar-footer bar-positive item-input-inset">
-    <label class="item-input-wrapper">
-      <input type="text" id="message" name="message" ng-model="room_ctrl.message" placeholder="Type message">
-    </label>
-    <a class="button button-icon icon ion-android-send" ng-click="sendTextMessage()"></a>
-  </footer>
-  -->
 </ion-view>

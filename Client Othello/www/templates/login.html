@@ -1,4 +1,4 @@
-<ion-view title="Login" ng-controller="HomeController as home_ctrl">
+<ion-view cache-view="false" title="Login" ng-controller="HomeController as home_ctrl">
   <header class="bar bar-header bar-positive">
     <h1 class="title">Othello</h1>
   </header>
@@ -6,9 +6,9 @@
   <ion-content class="has-header">
 
   <h2 class="text-main">Bienvenido</h2>
-
+  <input type="text" ng-model="home_ctrl.username" placeholder="Nombre">
   <ion-toggle class="check-acces" ng-model="home_ctrl.accesibilidad" disabled checked="false">Accesibilidad</ion-toggle>
-  <button class="button button-positive button-full button-footer" ng-click="login(home_ctrl.accesibilidad)">Entrar</button>
+  <button class="button button-positive button-full button-footer" ng-click="login(home_ctrl.accesibilidad, home_ctrl.username)">Entrar</button>
 
   </ion-content>
 
