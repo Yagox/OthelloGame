@@ -52,24 +52,23 @@ io.on('connection', (socket) => {
 		socket.emit("board inicial", tablero);
 		socket.join(room_name);
 		socket.in('waitRooms').emit('list rooms', GameInicial.listRooms());
-        console.log(tablero);
 	});
 	socket.on( 'join board', data => {
       console.log("Toca Put join board':" + socket.client.id);
         let tablero =  GameInicial.joinGame(data['room'], socket.client.id);
         let room_name = tablero['room'];
-				let players = GameInicial.playersGameInfoCurrent(tablero['room'], socket.client.id);
-				let oponent = {
-					'oponent': players['current'],
-	        'current': players['oponent'],
-	        'color': (players['color'] == 'negra' ) ? 'blanca' : 'negra'
-				}
-		socket.emit("board inicial",  tablero);
-		socket.emit("playersGame", players);
+        let players = GameInicial.playersGameInfoCurrent(tablero['room'], socket.client.id);
+        let oponent = {
+            'opponent': players['current'],
+            'current': players['opponent'],
+            'color': (players['color'] == 'negra' ) ? 'blanca' : 'negra'
+        }
+        socket.in(room_name).emit('playersGame', oponent);
+        socket.emit("playersGame", players);
+
 		socket.join(room_name);
 		socket.in(room_name).emit('board inicial' ,tablero);
-		socket.in(room_name).emit('playersGame', oponent);
-		console.log(tablero);
+		socket.emit("board inicial",  tablero);
 	});
   	socket.on( 'put disk' , data => {
   	      console.log("Toca Put disk:" + socket.client.id);
