@@ -47,7 +47,7 @@ io.on('connection', (socket) => {
   	socket.on( 'create board' , data =>{
   	      console.log("Toca Put create board':" + socket.client.id);
 
-  	    let tablero = GameInicial.nuevoGame(socket.client.id);
+  	    let tablero = GameInicial.nuevoGame(socket.client.id, data['user']);
   	    let room_name = tablero['room'];
 		socket.emit("board inicial", tablero);
 		socket.join(room_name);
@@ -56,7 +56,7 @@ io.on('connection', (socket) => {
 	socket.on( 'join board', data => {
       console.log("Toca Put join board':" + socket.client.id);
          let room_name = data['room'];
-        let tablero =  GameInicial.joinGame(room_name, socket.client.id);
+        let tablero =  GameInicial.joinGame(room_name, socket.client.id, data['user']);
         let players = GameInicial.playersGameInfoCurrent(room_name, socket.client.id);
         let oponent = {
             'opponent': players['current'],
