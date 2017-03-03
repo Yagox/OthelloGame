@@ -97,7 +97,11 @@
       me.current_room = data['room'];
       localStorageService.set('room', me.current_room);
       console.log(data);
-      $state.go('game');
+      if(localStorageService.get('mode')){
+        $state.go('game-accesible');
+      }else{
+        $state.go('game');
+      }
     });
 
     $interval(function() {

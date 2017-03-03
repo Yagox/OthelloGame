@@ -17,7 +17,7 @@
     <div class="board">
       <div class="board-row" ng-repeat="row in game_ctrl.rowsT">
           <div class="board-column" ng-repeat="column in game_ctrl.columnsT track by $index">
-            <div class="board-cell {{row}}-{{column}} {{ getToken(row, column)}}" ng-click="putToken(row, column, getToken(row, column))" >
+            <div class="board-cell {{row}}-{{column}} {{ getToken(row, column)}} no-accesibilidad" ng-click="putToken(row, column, getToken(row, column))" >
 
             </div>
           </div>

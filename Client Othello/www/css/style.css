@@ -4,6 +4,7 @@ header.login {
   margin-top:15%;
 }
 
+
 header.login .title{
   font-family: fantasy;
   font-size: 2rem;
@@ -226,7 +227,11 @@ ion-content.game .turn{
     width: 100%;
 }
 
-.board .token-posible{
+.board .token-posible.no-accesibilidad{
+    background-color: #5be3e8;
+}
+
+.board .active-token{
     background-color: #5be3e8;
 }
 
