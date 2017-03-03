@@ -1,11 +1,12 @@
 (function(){
   angular.module('starter')
-    .controller('GameController', ['$scope', '$state', 'localStorageService', 'SocketService', 'moment', '$ionicScrollDelegate', GameController]);
+    .controller('GameController', ['$scope', '$state', '$interval', 'localStorageService', 'SocketService', 'moment', '$ionicScrollDelegate', GameController]);
 
-  function GameController($scope, $state, localStorageService, SocketService, moment, $ionicScrollDelegate) {
+  function GameController($scope, $state, $interval, localStorageService, SocketService, moment, $ionicScrollDelegate) {
 
     var me = this;
     var data = localStorageService.get('game');
+    me.barrido = true;
     me.start = localStorageService.get('start');
     me.current_user = localStorageService.get('current_user');
     me.color = localStorageService.get('color');
@@ -100,14 +101,17 @@
         me.nextToken = {};
         for(var i=0; i< data['next token'].length; i++){
           var token = data['next token'][i];
-          me.nextToken[token[0]] = {}
+          if(me.nexToken[token[0]] !=null){
+            me.nextToken[token[0]] = {}
+          }
           me.nextToken[token[0]][token[1]] = true;
         }
+        data['next token'] = me.nexToken;
         me.turn = (me.token == me.color) ? me.current_user : me.opponent_user;
         data['turn'] = me.turn;
         localStorageService.set('game', data);
-        $state.go($state.current, {}, {reload: true});
       }
     });
+
   }
   })();

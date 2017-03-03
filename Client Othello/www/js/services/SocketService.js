@@ -6,7 +6,7 @@
   function SocketService(socketFactory){
     return socketFactory({
 
-      ioSocket: io.connect('http://192.168.1.100:3001')
+      ioSocket: io.connect('http://192.168.1.38:3001')
     });
   }
 })();

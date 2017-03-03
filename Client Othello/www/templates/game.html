@@ -1,16 +1,17 @@
 <ion-view title="game" ng-controller="GameController as game_ctrl">
-  <header class="bar bar-header bar-positive">
+  <header class="rooms bar bar-header bar-positive">
     <h1 class="title">Othello Game</h1>
+    <i class="icon ion-gear-a"></i>
   </header>
 
-  <ion-content class="has-header padding">
-    <div class="info-game" ng-if="game_ctrl.start">
+  <ion-content class="game padding">
+    <div class="info-game">
       <div class="oponnents">
-        <p>{{ game_ctrl.current_user }} VS {{ game_ctrl.opponent_user }}</p>
-        <p>Tus fichas son de color {{ game_ctrl.color }}</p>
+        <p class="info">{{ game_ctrl.current_user }} VS {{ game_ctrl.opponent_user }}</p>
+        <p class="color">Tus fichas son de color {{ game_ctrl.color }}</p>
       </div>
       <div class="turn">
-        <p>Turno de {{ game_ctrl.color }}</p>
+        <p>Turno de {{ game_ctrl.token }}</p>
       </div>
     </div>
     <div class="board">

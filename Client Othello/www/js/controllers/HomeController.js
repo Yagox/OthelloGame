@@ -3,7 +3,6 @@
     .controller('HomeController', ['$scope', '$state', '$interval', 'localStorageService', 'SocketService', HomeController]);
 
   function HomeController($scope, $state, $interval, localStorageService, SocketService, AccesibilidadService){
-
     var me = this;
     me.current_room = null;
     me.rooms = localStorageService.get('rooms');
@@ -12,6 +11,7 @@
     me.current_user = null;
     me.color = null;
     me.opponent_user = null;
+    me.current_room = 'login';
 
     $scope.login = function(accesibilidad, username){
       me.mode = accesibilidad;

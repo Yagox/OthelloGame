@@ -1,117 +1,214 @@
-/* Empty. Add your own CSS if you like */
-@import "ionic";
-header {
-  height: 35px !important;
+header.login {
+  display:block;
+  text-align: center;
+  margin-top:15%;
 }
 
-body{
-  font-family: serif;
+header.login .title{
+  font-family: fantasy;
+  font-size: 2rem;
+  font-weight: 300;
+  color: #8c96a6;
 }
 
-
-ion-footer{
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    height: 50px;
+header.login .sub-title{
+  font-family: fantasy;
+  font-size: 2.7rem;
+  font-weight: 300;
+  color: #8c96a6;
 }
 
-.has-header{
-    height: 185px;
+header.login .sub-title span{
+  font-family: cursive;
+  font-size: 65px;
+  font-weight: 500;
+  color: #224b8c;
 }
 
-h2.text-main {
-    font-size: 20px;
-    text-align: center;
-    color: #8b8b85;
-    font-family: serif;
-    padding-top: 30px;
+ion-content.login{
+  top:45%;
 }
 
-.check-acces{
-      border: none;
-      margin: 0 auto;
-      font-size: 15px;
-      padding-left: 40px;
-      padding-top: 17px;
-      margin-top: 60px;
+ion-content.login .scroll{
+  height: 100%;
 }
 
-.button-footer{
+ion-content.login .username{
+     padding-left: 1rem;
+     padding-right: 1rem;
+     margin-bottom:10%;
+}
+
+ion-content.login .username input{
+    border-bottom: 1px solid black;
+    max-width: 95%;
+    margin: 0 auto;
+}
+::-webkit-input-placeholder {
+   text-align: center;
+}
+
+::-webkit-input-placeholder::before {
+  content:'\1F50D';
+  padding-right: .2em;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   text-align: center;
+}
+
+:-moz-placeholder::before {
+  content:'\1F50D';
+  padding-right: .2em;
+}
+
+ion-content .accesibilidad .check-acces{
+  border: none;
+  width: 180px;
+  margin-top: 1px;
+  margin: 0 auto;
+}
+
+footer {
+  width:100%;
+  position: absolute;
+  bottom : 0;
+  margin: 0;
+}
+
+footer .button-login{
+  margin-bottom: 0 !important;
+}
+
+/* ROOMS */
+
+header.rooms {
+  height: 13% !important;
+}
+
+header.rooms .title{
+  font-size: 3rem !important;
+  margin-top: 6% !important;
+  font-family: cursive;
+}
+
+.rooms .ion-gear-a{
     position: absolute;
-    bottom: 0;
-    margin-bottom: 0px !important;
+    right: 3%;
+    bottom: 30%;
+    font-size: 20px;
 }
 
-.header-rooms{
-  margin-bottom: 10px;
-  text-align:center;
+ion-content.rooms{
+    height: 70%;
+    margin-top: 25%;
 }
 
-.rooms{
+ion-content.rooms{
   color: #8b8b85;
   text-align: center;
 }
 
-.room{
+ion-content .room{
   width: 100%;
-  height: 60px;
+  height: 80px;
   margin: 0 auto;
   background: #dcf4f5;
-  margin-bottom: 2px;
+  margin-bottom: 2%;
 }
 
-.room.active-room{
+ion-content .room.active-room{
   background: #5be3e8;
 }
 
-.header-rooms{
+ion-content .header-rooms{
     border-bottom: 1px solid #e1dede;
     box-shadow: 0px 2px 1px -2px #888888;
+    margin-bottom: 10px;
+    text-align:center;
 }
 
-.card-title {
+ion-content .header-rooms label{
+    font-size: 1.5rem !important;
+}
+
+ion-content .rooms .card-title {
   top: 22%;
-  font-size: 12px;
+  font-size: 1.2rem;
   font-weight: bold;
   color: black;
   position: relative;
   text-transform: capitalize;
 }
 
-.card-subtitle {
+ion-content .rooms .card-subtitle {
   position: relative;
-  font-size: 7px;
-  top: 4%;
+  font-size: 1.rem;
+  top: 17%;
   color: black;
   text-transform: uppercase;
 }
 
+footer.rooms i{
+  position: absolute;
+  right: 10%;
+}
+
+
+/* GAME */
+ion-content.game{
+  margin-top: 23%;
+}
+
+ion-content.game .oponnents p{
+    text-align: center;
+}
+
+ion-content.game .oponnents p.info{
+    font-size: 1rem;
+    font-family: fantasy;
+    font-weight: bold;
+}
+
+ion-content.game .oponnents p.color{
+    font-size: 1.1rem;
+    font-family: fantasy;
+    font-family:300;
+}
+
+ion-content.game .turn{
+    text-align: center;
+    font-weight: bolder;
+    font-size: 1.2rem;
+}
 
 .board{
-  height: 178px;
-  width: 178px;
+  height: 60%;
+  width: 100%;
+  max-width: 340px;
+  max-height: 340px;
   background-color: #9dc1d4;
   border: 1px solid #1b1a5a;
+  margin: 0 auto;
 }
 
 .board .board-row{
-    height: 22px;
+    height: 12.5%;
     border-bottom: 0.5px solid white;
 }
 
 .board .board-column{
-    height: 22px;
     border-right: 0.5px solid white;
-    width: 22px;
+    width: 12.5%;
+    height: 100%;
     float: left;
 }
 
 .board .token{
-    height: 19px;
-    width: 19px;
-    border-radius: 10px;
-    margin: 1px;
+    height: 95%;
+    width: 95%;
+    border-radius: 50%;
+    margin: 2%;
 }
 
 .board .token-white{
@@ -134,9 +231,10 @@ h2.text-main {
 }
 
 .board .token-select{
-    height: 21px;
-    width: 21px;
-    border-radius: 10px;
+    height: 95%;
+    width: 95%;
+    border-radius: 50%;
+    margin: 2%;
     border: 1px solid #3263d3;
 }
 
